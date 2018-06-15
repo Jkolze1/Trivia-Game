@@ -69,6 +69,7 @@ var questions = [{
     divClass: ".log"
 }
 ] 
+
 // click to start 
 var startGame = $("#start-button").on('click', function() {
     $(this).parent().hide();
@@ -76,12 +77,16 @@ var startGame = $("#start-button").on('click', function() {
     timer(60); 
     showQuestion();
 });
+//reset code
+$("#restart").on("click", restart);  // restarts the games 
+    var restart = $("#restart").on('click', function(){
+});
 
-// displays questions
+// displays questions aka super cool question displayer
 var showQuestion = function() {
     $(".questions :not('#submit')").empty(); 
 
-    // loops through all 10 of the questions 
+    // loops through all the questions 
     for (var j = 0; j < 10; j++) {
         $('.questions').prepend('<div class="' + questions[j].name + '"></div>');
         $(questions[j].divClass).append('<div class ="ques-title">' + questions[j].ques + '</div>');
@@ -133,7 +138,7 @@ var timer = function(seconds) {
 
     // stops timer once submit button is hit
     $('#submit').on('click', function() {
-        clearInterval(timer); //sub is now submit
+        clearInterval(timer); 
     })
 }; 
 
@@ -144,7 +149,7 @@ var gradeQuiz = $('#submit').on('click', function() {
     var wrongAns = 0;
     var unAnswered = 0;
 
-    // loop through correctArray & radioName to match html elements & answers
+    // loop through to match html elements & answers
     for (var i = 0; i < 10; i++) {
 
         if ($('input:radio[name="' + questions[i].name + '"]:checked').val() === questions[i].correct) {
@@ -159,12 +164,9 @@ var gradeQuiz = $('#submit').on('click', function() {
     // display right and wrong answers
      $('#screen1').append(correctAns); 
      $('#screen2').append(wrongAns);
-     //restart button
-     $('#reset').append('reset');
     // fade out questions
     $('.container').fadeOut(1000);
     // show answerScreen
     $('#answerScreen').show();
 }); 
-//restart button needed you dumb fuck
-//sumbit button needs name changed from sub-btn
+
